@@ -1,11 +1,180 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import EmailCta from "../components/EmailCta.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const kits = [
+	{ brand: "ASUS", adapter: "14-1 pin adapter board", note: "Z170–Z390 era boards use the 14-1 pin header; older boards use 20-1 pin directly." },
+	{ brand: "Gigabyte", adapter: "12-1 pin adapter board", note: "Newer Gigabyte boards (Z370/Z390, AM4 500) use 12-1 pin; older boards use 20-1 pin." },
+	{ brand: "MSI", adapter: "14-1 pin adapter board", note: "Most MSI boards in range use the 14-1 pin JTPM1 header." },
+	{ brand: "ASRock", adapter: "18-1 pin adapter board", note: "ASRock boards use an 18-1 pin TPM header." },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Authikey — TPM 2.0 / 1.2 Modules for 2013–2018 Motherboards"
+	description="2-in-1 reversible TPM 2.0 + 1.2 hardware modules for ASUS, Gigabyte, MSI and ASRock motherboards (2013–2018, LPC bus). Install Windows 11 on older PCs. Order by email."
+>
+	<section class="hero">
+		<div class="container">
+			<span class="badge">Infineon SLB9665 · LPC bus · Dual firmware</span>
+			<h1>TPM 2.0 / 1.2 modules for 2013–2018 motherboards</h1>
+			<p>
+				One reversible module, two real Infineon TPM chips: TPM 2.0 on one side for
+				Windows 11, TPM 1.2 on the other for legacy systems. Kits for ASUS, Gigabyte,
+				MSI and ASRock — <strong>US$53 per kit</strong>, adapter board included.
+			</p>
+			<div class="hero-actions">
+				<a class="btn btn-primary" href="/products/">Check compatibility</a>
+				<a class="btn btn-secondary" href="/how-to-buy/">How to buy by email</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<h2>Is this the right module for your board?</h2>
+			<p class="lede">
+				Answer these four questions before you order — they decide everything.
+			</p>
+			<div class="grid">
+				<div class="card">
+					<h3>Does your motherboard have a TPM header?</h3>
+					<p>
+						Look for a header labeled <code>TPM</code>, <code>JTPM1</code> or
+						<code>SPI_TPM</code> near the bottom edge of the board, or check your
+						motherboard manual. No header — no way to install a module.
+					</p>
+				</div>
+				<div class="card">
+					<h3>Was it made between 2013 and 2018?</h3>
+					<p>
+						Our modules use the <strong>LPC bus</strong>. Boards made after 2018
+						switched to the SPI bus and are <strong>not compatible</strong>. Boards
+						before 2013 often lack the UEFI BIOS that Windows 11 requires.
+					</p>
+				</div>
+				<div class="card">
+					<h3>Do you need TPM 2.0 or 1.2?</h3>
+					<p>
+						Windows 11 requires TPM 2.0. Some enterprise or legacy software still
+						needs TPM 1.2. Our module is reversible — flip it to switch versions,
+						no firmware flashing needed.
+					</p>
+				</div>
+				<div class="card">
+					<h3>AMD user with fTPM stuttering?</h3>
+					<p>
+						On some AM4 boards, enabling firmware fTPM causes periodic system
+						stutter. A discrete hardware TPM module avoids the issue entirely.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section alt">
+		<div class="container">
+			<h2>Four kits, one price — US$53</h2>
+			<p class="lede">
+				Every kit contains the same 2-in-1 reversible 20-1 pin TPM module plus a
+				brand-specific adapter board. Pick the kit that matches your motherboard brand.
+			</p>
+			<div class="grid">
+				{kits.map((kit) => (
+					<div class="card kit-card">
+						<h3>{kit.brand} kit</h3>
+						<p class="adapter">20-1 pin module + {kit.adapter}</p>
+						<p>{kit.note}</p>
+					</div>
+				))}
+			</div>
+			<p class="grid-footnote">
+				Full chipset lists for each kit are on the
+				<a href="/products/">Products &amp; Compatibility</a> page.
+			</p>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<h2>How buying works</h2>
+			<p class="lede">
+				We no longer run an online checkout. Ordering is a short email exchange —
+				you get a compatibility check from a human before you pay.
+			</p>
+			<ol class="steps">
+				<li><strong>Check compatibility</strong> — confirm your board's brand, year and TPM header on the <a href="/products/">products page</a>.</li>
+				<li><strong>Email us</strong> — tell us which of the four kits you need (ASUS / Gigabyte / MSI / ASRock) and your shipping country.</li>
+				<li><strong>We confirm</strong> — we verify compatibility and reply with shipping cost and a payment link.</li>
+				<li><strong>Pay &amp; receive</strong> — pay via the link, and we ship from Taipei, Taiwan with tracking.</li>
+			</ol>
+			<EmailCta />
+		</div>
+	</section>
 </Layout>
+
+<style>
+	.hero {
+		padding: 5rem 0 4rem;
+		background:
+			radial-gradient(ellipse at 70% 20%, rgba(63, 182, 168, 0.12), transparent 55%),
+			var(--bg);
+		border-bottom: 1px solid var(--border);
+	}
+
+	.hero h1 {
+		font-size: clamp(2rem, 5vw, 3rem);
+		margin: 0.9rem 0 1rem;
+		max-width: 44rem;
+	}
+
+	.hero p {
+		font-size: 1.1rem;
+		color: var(--text-muted);
+		max-width: 42rem;
+	}
+
+	.hero p strong {
+		color: var(--text);
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1rem;
+		margin-top: 1.8rem;
+		flex-wrap: wrap;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.2rem;
+		margin-top: 1.8rem;
+	}
+
+	.card h3 {
+		margin-top: 0;
+		font-size: 1.08rem;
+	}
+
+	.kit-card .adapter {
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 0.92rem;
+	}
+
+	.grid-footnote {
+		margin-top: 1.5rem;
+		color: var(--text-muted);
+	}
+
+	.steps {
+		max-width: 44rem;
+		padding-left: 1.4rem;
+		margin: 1.5rem 0 2rem;
+	}
+
+	.steps li {
+		margin-bottom: 0.9rem;
+	}
+</style>

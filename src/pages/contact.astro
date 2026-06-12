@@ -1,0 +1,81 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EmailCta from "../components/EmailCta.astro";
+---
+
+<Layout
+	title="Contact — Authikey"
+	description="Contact Authikey by email for TPM kit orders and compatibility questions. Based in Taipei, Taiwan. English support, worldwide shipping."
+>
+	<section class="section">
+		<div class="container narrow">
+			<h1>Contact us</h1>
+			<p class="lede">
+				Email is our only contact channel — no forms, no chat widgets. Every
+				message is read and answered by a person.
+			</p>
+
+			<div class="card contact-card">
+				<EmailCta />
+				<table>
+					<tbody>
+						<tr><th>Response time</th><td>Within 1–2 business days</td></tr>
+						<tr><th>Location</th><td>Taipei, Taiwan (UTC+8)</td></tr>
+						<tr><th>Language</th><td>English</td></tr>
+						<tr><th>Shipping</th><td>Worldwide, from Taipei, with tracking</td></tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="card">
+				<h2>What to include in your email</h2>
+				<ul>
+					<li>
+						<strong>Ordering:</strong> which of the four kits you need (ASUS /
+						Gigabyte / MSI / ASRock) and your shipping country. See
+						<a href="/how-to-buy/">How to Buy</a> for a copy-paste template.
+					</li>
+					<li>
+						<strong>Compatibility questions:</strong> your motherboard brand and
+						exact model number — we'll check it for you before you buy.
+					</li>
+					<li>
+						<strong>Support after purchase:</strong> your order details and a
+						description of the issue, plus your BIOS version if relevant.
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2.2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.narrow {
+		max-width: 760px;
+	}
+
+	.contact-card {
+		margin: 2rem 0 1.2rem;
+		display: grid;
+		gap: 1.4rem;
+	}
+
+	.card h2 {
+		margin-top: 0;
+		font-size: 1.2rem;
+	}
+
+	.card ul {
+		padding-left: 1.3rem;
+		margin: 0.5rem 0 0;
+	}
+
+	.card li {
+		margin-bottom: 0.7rem;
+	}
+</style>

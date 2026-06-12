@@ -1,0 +1,201 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EmailCta from "../components/EmailCta.astro";
+
+const faqs = [
+	{
+		q: "Which motherboard years does this work with?",
+		a: "UEFI motherboards manufactured between roughly 2013 and 2018. The exact boundary is the TPM header bus: our module uses the LPC bus, which vendors used until around 2018.",
+	},
+	{
+		q: "Why don't post-2018 motherboards work?",
+		a: "Around 2018, motherboard vendors switched their TPM headers from the LPC bus to the SPI bus. An LPC module physically cannot communicate over an SPI header, regardless of pin adapters. If your board is from 2019 or later, this module will not work — but those boards almost always have working firmware TPM (Intel PTT / AMD fTPM) built in, so you likely don't need a module at all.",
+	},
+	{
+		q: "Why might pre-2013 boards be a problem?",
+		a: "Windows 11 requires UEFI with Secure Boot capability in addition to TPM 2.0. Many pre-2013 boards have legacy BIOS only, so even with a working TPM module they cannot meet the Windows 11 requirements.",
+	},
+	{
+		q: "I have an AMD system with fTPM stutter. Will this help?",
+		a: "Yes — this is one of the most common reasons people buy a discrete TPM module. On some AM4 boards, the firmware fTPM periodically accesses SPI flash and causes system-wide stutters or audio crackling. A discrete hardware TPM on the LPC header bypasses fTPM entirely: install the module, then select the discrete TPM (and disable fTPM) in the BIOS.",
+	},
+	{
+		q: "How do I switch between TPM 2.0 and TPM 1.2?",
+		a: "Power off the PC, pull the module, flip it over and reinsert it. One side carries an Infineon SLB9665 running TPM 2.0 firmware 5.63.3353.0, the other side runs TPM 1.2 firmware 4.43.259.0. No software flashing is involved. Note that switching TPM versions clears any keys stored in the previous TPM — suspend or decrypt BitLocker first.",
+	},
+	{
+		q: "What do I need besides the TPM to install Windows 11?",
+		a: "A 64-bit CPU on Microsoft's supported list (or a registry bypass for CPU checks), UEFI boot with CSM disabled, a GPT-partitioned system disk, 4 GB RAM and 64 GB storage. The TPM module satisfies the TPM 2.0 requirement; the rest is BIOS configuration.",
+	},
+	{
+		q: "Windows doesn't detect the TPM after installation. What should I check?",
+		a: "First, confirm the module is fully seated and oriented per pin 1. Second, enable the TPM (sometimes called \"Security Device\" or \"TPM Device Selection — discrete TPM\") in the BIOS. Third, update the BIOS to the latest version — early BIOS releases for some boards had TPM 2.0 bugs. Then check Windows with tpm.msc.",
+	},
+	{
+		q: "Does the kit include the adapter board?",
+		a: "Yes. Every kit ships with the reversible 20-1 pin module plus the adapter board for your brand: ASUS 14-1 pin, Gigabyte 12-1 pin, MSI 14-1 pin, or ASRock 18-1 pin. If your board has a native 20-1 pin header, plug the module in directly and keep the adapter as a spare.",
+	},
+	{
+		q: "Can you confirm compatibility for my exact motherboard?",
+		a: "Yes — that's how every order starts. Email us your motherboard brand and exact model number and we'll check it against our compatibility data before you pay.",
+	},
+];
+---
+
+<Layout
+	title="Installation & FAQ — Authikey TPM Kits"
+	description="How to install an Authikey TPM 2.0/1.2 module: BIOS settings, CSM/UEFI configuration, Windows 11 requirements, AMD fTPM stutter, and answers to common compatibility questions."
+>
+	<section class="section">
+		<div class="container">
+			<h1>Installation &amp; FAQ</h1>
+			<p class="lede">
+				Installation takes about five minutes plus two BIOS settings. Read the
+				steps once before you start — the CSM setting is the one people miss.
+			</p>
+
+			<div class="card">
+				<h2>Installation steps</h2>
+				<ol class="steps">
+					<li>
+						<strong>Power off and unplug</strong> the PC. Ground yourself before
+						handling the module.
+					</li>
+					<li>
+						<strong>Locate the TPM header</strong> (labeled <code>TPM</code>,
+						<code>JTPM1</code> or similar, usually along the bottom edge). Check your
+						motherboard manual for the exact position and pin 1 orientation.
+					</li>
+					<li>
+						<strong>Insert the module</strong> — directly into a 20-1 pin header, or
+						via the included adapter board for 14-1 / 12-1 / 18-1 pin headers. The
+						missing pin position is your orientation guide; never force it.
+					</li>
+					<li>
+						<strong>Choose the TPM version</strong>: the module is reversible — one
+						side is TPM 2.0 (for Windows 11), the other is TPM 1.2.
+					</li>
+					<li>
+						<strong>Enable the TPM in the BIOS</strong> — look under Security /
+						Trusted Computing. On AMD boards, select the discrete TPM instead of fTPM.
+					</li>
+					<li>
+						<strong>Disable CSM</strong> (or enable UEFI-only boot mode) — Windows 11
+						requires UEFI boot with Secure Boot capability.
+					</li>
+					<li>
+						<strong>Verify, then install</strong> — in Windows, run
+						<code>tpm.msc</code> to confirm the TPM is detected, then proceed with
+						your Windows 11 installation or upgrade.
+					</li>
+				</ol>
+				<p class="tip">
+					Tip: update your BIOS to the latest version first. Several 2013–2018 boards
+					gained or fixed TPM 2.0 support in later BIOS releases.
+				</p>
+			</div>
+
+			<h2 class="faq-title">Frequently asked questions</h2>
+			<div class="faq-list">
+				{faqs.map((faq) => (
+					<details class="card">
+						<summary>{faq.q}</summary>
+						<p>{faq.a}</p>
+					</details>
+				))}
+			</div>
+
+			<div class="cta-block">
+				<h2>Question not covered?</h2>
+				<p class="lede">
+					Email us your motherboard model and what you're trying to do — we answer
+					compatibility questions before any purchase.
+				</p>
+				<EmailCta subject="TPM question" />
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2.2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.card h2 {
+		margin-top: 0;
+		font-size: 1.3rem;
+	}
+
+	.steps {
+		padding-left: 1.3rem;
+		margin: 1rem 0 0;
+	}
+
+	.steps li {
+		margin-bottom: 0.8rem;
+	}
+
+	.tip {
+		margin: 1.2rem 0 0;
+		color: var(--text-muted);
+		border-left: 3px solid var(--accent);
+		padding-left: 0.9rem;
+	}
+
+	.faq-title {
+		margin-top: 3rem;
+	}
+
+	.faq-list {
+		display: grid;
+		gap: 0.8rem;
+		margin-top: 1.2rem;
+	}
+
+	details.card {
+		padding: 0;
+	}
+
+	details summary {
+		cursor: pointer;
+		font-weight: 600;
+		padding: 1.1rem 1.4rem;
+		list-style: none;
+		position: relative;
+		padding-right: 2.8rem;
+	}
+
+	details summary::after {
+		content: "+";
+		position: absolute;
+		right: 1.4rem;
+		top: 50%;
+		transform: translateY(-50%);
+		color: var(--accent);
+		font-size: 1.3rem;
+	}
+
+	details[open] summary::after {
+		content: "−";
+	}
+
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+
+	details p {
+		margin: 0;
+		padding: 0 1.4rem 1.2rem;
+		color: var(--text-muted);
+	}
+
+	.cta-block {
+		margin-top: 3rem;
+	}
+
+	.cta-block h2 {
+		margin-bottom: 0.4rem;
+	}
+</style>

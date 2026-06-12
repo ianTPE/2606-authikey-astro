@@ -1,0 +1,196 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EmailCta from "../components/EmailCta.astro";
+
+const kits = [
+	{
+		id: "asus",
+		brand: "ASUS",
+		adapter: "ASUS 14-1 pin TPM connector adapter board",
+		headers: "20-1 pin (direct) or 14-1 pin (via adapter)",
+		intelDirect: "X99, X79, Z97, H97, Z87, H87, B85, H81, Z77, H77, B75",
+		intelAdapter:
+			"Z390, H370, B365, B360, Z370, H310, Q370, X299, C621, C422, C246, Q270, B250, Z270, H270, Z170, H170, H110, Q170, B150",
+		amd: "AM4 (300 / 400 series), AM3+, FM2+",
+	},
+	{
+		id: "gigabyte",
+		brand: "Gigabyte",
+		adapter: "Gigabyte 12-1 pin TPM connector adapter board",
+		headers: "20-1 pin (direct) or 12-1 pin (via adapter)",
+		intelDirect:
+			"X99, X79, C606, Z97, H97, Z87, H87, B85, Z77, H77, B75, Q270, B250, Z270, H270, Z170, H170, H110, Q170, B150",
+		intelAdapter: "Z390, H370, B365, B360, Z370, H310, Q370, X299, C621, C246",
+		amd: "AM4 300 / 400 series (20-1 pin), AM4 500 series (12-1 pin)",
+	},
+	{
+		id: "msi",
+		brand: "MSI",
+		adapter: "MSI 14-1 pin TPM connector adapter board",
+		headers: "20-1 pin (direct) or 14-1 pin JTPM1 (via adapter)",
+		intelDirect: "X99, X79, C606, Z97, H97, Z87, H87, H81, B85, Z77, H77, B75",
+		intelAdapter:
+			"Z390, H370, B365, B360, Z370, H310, Q370, X299, C621, C246, Q270, B250, Z270, H270, Z170, H170, H110, Q170, B150",
+		amd: "AM4 (300 / 400 series)",
+	},
+	{
+		id: "asrock",
+		brand: "ASRock",
+		adapter: "ASRock 18-1 pin TPM connector adapter board",
+		headers: "20-1 pin (direct) or 18-1 pin (via adapter)",
+		intelDirect: "X99, X79, C606, Z97, H97, Z87, H87, H81, B85, Z77, H77, B75",
+		intelAdapter:
+			"Z390, H370, B365, X299, Q270, Z270, H270, Z170, H170, H110",
+		amd: "AM4 (300 / 400 series)",
+	},
+];
+---
+
+<Layout
+	title="Products & Compatibility — Authikey TPM Kits"
+	description="Four 2-in-1 reversible TPM 2.0 + 1.2 kits for ASUS, Gigabyte, MSI and ASRock motherboards. Full chipset compatibility lists, pin header types and shared specifications. US$53 per kit."
+>
+	<section class="section">
+		<div class="container">
+			<h1>Products &amp; Compatibility</h1>
+			<p class="lede">
+				All four kits share the same 2-in-1 reversible TPM module — two Infineon
+				SLB9665 chips, TPM 2.0 on one side and TPM 1.2 on the other, on the
+				<strong>LPC bus</strong>. The only difference is the brand-specific adapter
+				board included in the box. Every kit is <strong>US$53</strong>.
+			</p>
+
+			<div class="card spec-card">
+				<h2>Shared specifications</h2>
+				<table>
+					<tbody>
+						<tr><th>Chips</th><td>2 × Infineon SLB9665 (one per side)</td></tr>
+						<tr><th>TPM 2.0 firmware</th><td>5.63.3353.0</td></tr>
+						<tr><th>TPM 1.2 firmware</th><td>4.43.259.0</td></tr>
+						<tr><th>Bus</th><td>LPC (not SPI — boards after 2018 are not supported)</td></tr>
+						<tr><th>Board years</th><td>2013–2018 UEFI motherboards</td></tr>
+						<tr><th>Compliance</th><td>Windows Security Processor compliant; every module tested before shipping</td></tr>
+						<tr><th>In the box</th><td>Reversible 20-1 pin TPM module + brand-specific adapter board</td></tr>
+						<tr><th>Price</th><td>US$53 per kit</td></tr>
+					</tbody>
+				</table>
+			</div>
+
+			<nav class="kit-jump">
+				Jump to:
+				{kits.map((kit) => <a href={`#${kit.id}`}>{kit.brand}</a>)}
+			</nav>
+
+			{kits.map((kit) => (
+				<article class="card kit" id={kit.id}>
+					<header class="kit-header">
+						<h2>{kit.brand} kit</h2>
+						<span class="badge">US$53</span>
+					</header>
+					<table>
+						<tbody>
+							<tr><th>Header types</th><td>{kit.headers}</td></tr>
+							<tr><th>Adapter included</th><td>{kit.adapter}</td></tr>
+							<tr><th>Intel chipsets (20-1 pin, direct)</th><td>{kit.intelDirect}</td></tr>
+							<tr><th>Intel chipsets (via adapter)</th><td>{kit.intelAdapter}</td></tr>
+							<tr><th>AMD platforms</th><td>{kit.amd}</td></tr>
+						</tbody>
+					</table>
+				</article>
+			))}
+
+			<div class="card warn">
+				<h2>Before you order, double-check these</h2>
+				<ul>
+					<li>
+						<strong>Post-2018 boards are not compatible.</strong> They moved the TPM
+						header to the SPI bus; this is an LPC module.
+					</li>
+					<li>
+						<strong>Pre-2013 boards</strong> may lack the UEFI BIOS required for
+						Windows 11, even if the module itself works.
+					</li>
+					<li>
+						<strong>Count the pins</strong> on your TPM header and compare with your
+						motherboard manual — model names alone are not always enough.
+					</li>
+					<li>
+						Some Intel 9-series boards do not officially support TPM 2.0; check your
+						vendor's CPU/BIOS support list.
+					</li>
+					<li>
+						Boards from Supermicro, Foxconn, Acer and Fujitsu with a standard
+						<strong> 20-1 pin LPC header</strong> can use the module directly —
+						email us your exact model and we'll confirm.
+					</li>
+				</ul>
+			</div>
+
+			<div class="cta-block">
+				<h2>Not sure which kit fits?</h2>
+				<p class="lede">
+					Email us your motherboard brand and exact model — we'll confirm
+					compatibility before you pay anything.
+				</p>
+				<EmailCta subject="TPM compatibility check" />
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2.2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.spec-card,
+	.kit,
+	.warn {
+		margin-top: 1.8rem;
+	}
+
+	.spec-card h2,
+	.kit h2,
+	.warn h2 {
+		margin-top: 0;
+		font-size: 1.3rem;
+	}
+
+	.kit-jump {
+		margin-top: 2rem;
+		color: var(--text-muted);
+		display: flex;
+		gap: 0.9rem;
+		flex-wrap: wrap;
+	}
+
+	.kit-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.8rem;
+	}
+
+	.kit-header h2 {
+		margin: 0;
+	}
+
+	.warn ul {
+		padding-left: 1.3rem;
+		margin: 0.5rem 0 0;
+	}
+
+	.warn li {
+		margin-bottom: 0.7rem;
+	}
+
+	.cta-block {
+		margin-top: 3rem;
+	}
+
+	.cta-block h2 {
+		margin-bottom: 0.4rem;
+	}
+</style>

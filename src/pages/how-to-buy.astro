@@ -1,0 +1,175 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EmailCta from "../components/EmailCta.astro";
+---
+
+<Layout
+	title="How to Buy — Authikey TPM Kits"
+	description="Authikey TPM kits are sold by email, not online checkout. Tell us which kit you need (ASUS, Gigabyte, MSI or ASRock) and your country — we confirm compatibility and send a payment link. US$53 per kit."
+>
+	<section class="section">
+		<div class="container">
+			<h1>How to buy</h1>
+			<p class="lede">
+				<strong>We do not offer online checkout.</strong> All orders are placed by
+				email. This lets us confirm your motherboard is actually compatible before
+				you pay — most compatibility mistakes are caught at this step, not after
+				shipping.
+			</p>
+
+			<div class="card price-card">
+				<div class="price">US$53</div>
+				<div>
+					<strong>per kit, any brand</strong>
+					<p>
+						ASUS / Gigabyte / MSI / ASRock — same module, different adapter board.
+						Shipping is quoted per destination in our reply.
+					</p>
+				</div>
+			</div>
+
+			<h2>The four steps</h2>
+			<ol class="flow">
+				<li>
+					<h3>1. Check compatibility</h3>
+					<p>
+						Confirm your board was made 2013–2018 and has an LPC TPM header. See
+						<a href="/products/">Products &amp; Compatibility</a> for chipset lists.
+					</p>
+				</li>
+				<li>
+					<h3>2. Send us an email</h3>
+					<p>Write to <a href="mailto:support@authikey.com">support@authikey.com</a> and include:</p>
+					<ul>
+						<li><strong>Which kit you need</strong> — ASUS, Gigabyte, MSI or ASRock (or your exact motherboard model if unsure)</li>
+						<li><strong>Your shipping country / region</strong></li>
+					</ul>
+				</li>
+				<li>
+					<h3>3. We confirm and send a payment link</h3>
+					<p>
+						We verify compatibility, then reply with the total including shipping
+						and a payment link (PayPal, in US dollars). Expect a reply within
+						1–2 business days.
+					</p>
+				</li>
+				<li>
+					<h3>4. We ship from Taipei</h3>
+					<p>
+						After payment we ship from Taipei, Taiwan with tracking. Express
+						delivery is available on request for an additional fee.
+					</p>
+				</li>
+			</ol>
+
+			<div class="card">
+				<h2>Copy-paste email template</h2>
+				<pre>Subject: TPM kit order
+
+Hi,
+
+I'd like to order: [ASUS / Gigabyte / MSI / ASRock] kit
+My motherboard model: [optional, for a compatibility double-check]
+Shipping country: [your country]
+
+Thanks!</pre>
+			</div>
+
+			<div class="card">
+				<h2>Returns &amp; refunds</h2>
+				<p>
+					You may request a refund within <strong>30 days of delivery</strong>.
+					Return shipping is at the buyer's expense; refunds are processed within
+					two weeks of receiving the return. If we confirmed compatibility for your
+					exact board model and the module doesn't work on it, contact us first —
+					we'll sort it out.
+				</p>
+			</div>
+
+			<div class="cta-block">
+				<EmailCta subject="TPM kit order" />
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2.2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.price-card {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		margin: 1.8rem 0 2.5rem;
+		flex-wrap: wrap;
+	}
+
+	.price {
+		font-size: 2.4rem;
+		font-weight: 700;
+		color: var(--accent);
+		white-space: nowrap;
+	}
+
+	.price-card p {
+		margin: 0.2rem 0 0;
+		color: var(--text-muted);
+	}
+
+	.flow {
+		list-style: none;
+		padding: 0;
+		margin: 1.2rem 0 2rem;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.flow li {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		padding: 1.2rem 1.4rem;
+	}
+
+	.flow h3 {
+		margin: 0 0 0.4rem;
+		font-size: 1.05rem;
+		color: var(--accent);
+	}
+
+	.flow p, .flow ul {
+		margin: 0.3rem 0;
+		color: var(--text-muted);
+	}
+
+	.flow ul {
+		padding-left: 1.2rem;
+	}
+
+	.card h2 {
+		margin-top: 0;
+		font-size: 1.2rem;
+	}
+
+	.card {
+		margin-bottom: 1.2rem;
+	}
+
+	pre {
+		background: var(--surface-2);
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		padding: 1rem 1.2rem;
+		overflow-x: auto;
+		font-size: 0.9rem;
+		line-height: 1.6;
+		white-space: pre-wrap;
+	}
+
+	.cta-block {
+		margin-top: 2.5rem;
+	}
+</style>

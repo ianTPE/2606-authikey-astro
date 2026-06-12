@@ -1,0 +1,74 @@
+---
+interface Props {
+	subject?: string;
+}
+
+const email = "support@authikey.com";
+const { subject = "TPM kit inquiry" } = Astro.props;
+const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+---
+
+<div class="email-cta">
+	<a class="btn btn-primary" href={mailto}>Email us to buy</a>
+	<button class="copy-email" type="button" data-email={email}>
+		<span class="addr">{email}</span>
+		<span class="hint">click to copy</span>
+	</button>
+</div>
+
+<style>
+	.email-cta {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.copy-email {
+		background: var(--surface-2);
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		color: var(--text);
+		padding: 0.55rem 1rem;
+		font-size: 0.95rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		font-family: inherit;
+	}
+
+	.copy-email:hover {
+		border-color: var(--accent);
+	}
+
+	.copy-email .hint {
+		color: var(--text-muted);
+		font-size: 0.8rem;
+	}
+
+	.copy-email.copied .hint {
+		color: var(--accent);
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>(".copy-email").forEach((btn) => {
+		btn.addEventListener("click", async () => {
+			try {
+				await navigator.clipboard.writeText(btn.dataset.email ?? "");
+				const hint = btn.querySelector(".hint");
+				if (hint) {
+					hint.textContent = "copied!";
+					btn.classList.add("copied");
+					setTimeout(() => {
+						hint.textContent = "click to copy";
+						btn.classList.remove("copied");
+					}, 2000);
+				}
+			} catch {
+				/* clipboard unavailable; mailto link still works */
+			}
+		});
+	});
+</script>
