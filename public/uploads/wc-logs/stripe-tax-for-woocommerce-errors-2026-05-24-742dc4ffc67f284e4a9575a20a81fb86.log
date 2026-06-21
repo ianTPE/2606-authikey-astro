@@ -1,0 +1,14 @@
+2026-05-24T11:16:21+00:00 ERROR 
+(6a12de055cf4c) ==== Stripe Tax Version: 2.0.3 ====
+(6a12de055cf4c) ==== Start Log ====
+(6a12de055cf4c) Error message: 
+	Invalid tax location address
+(6a12de055cf4c) ==== End Log ====
+
+2026-05-24T11:16:22+00:00 ERROR 
+(6a12de06e1312) ==== Stripe Tax Version: 2.0.3 ====
+(6a12de06e1312) ==== Start Log ====
+(6a12de06e1312) Error message: 
+	Invalid tax location address
+(6a12de06e1312) ==== End Log ====
+

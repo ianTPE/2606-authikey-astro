@@ -1,0 +1,4 @@
+2026-05-24T11:16:22+00:00 WARNING After passing through woocommerce_cart_item_images filter, image with id 455 did not have a valid thumbnail property.
+2026-05-24T11:16:22+00:00 WARNING After passing through woocommerce_cart_item_images filter, image with id 456 did not have a valid thumbnail property.
+2026-05-24T11:16:52+00:00 WARNING After passing through woocommerce_cart_item_images filter, image with id 455 did not have a valid thumbnail property.
+2026-05-24T11:16:52+00:00 WARNING After passing through woocommerce_cart_item_images filter, image with id 456 did not have a valid thumbnail property.
