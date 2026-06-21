@@ -46,14 +46,18 @@ const slides = [
 					aria-label={`${i + 1} of ${slides.length}`}
 					aria-hidden={i === 0 ? "false" : "true"}
 				>
-					<img src={slide.src} alt={slide.alt} class="hero-slide-bg" loading={i === 0 ? "eager" : "lazy"} />
 					<div class="hero-slide-inner container">
-						<p class="hero-eyebrow">{slide.eyebrow}</p>
-						<h1 class="hero-heading">{slide.heading}</h1>
-						<p class="hero-sub"><strong>US$53 per kit</strong> · adapter board included · ships from Taipei</p>
-						<div class="hero-actions">
-							<a class="btn btn-primary" href="/products/">View products</a>
-							<a class="btn btn-ghost" href="/how-to-buy/">How to buy by email</a>
+						<div class="hero-text">
+							<p class="hero-eyebrow">{slide.eyebrow}</p>
+							<h1 class="hero-heading">{slide.heading}</h1>
+							<p class="hero-sub"><strong>US$53 per kit</strong> · adapter board included · ships from Taipei</p>
+							<div class="hero-actions">
+								<a class="btn btn-primary" href="/products/">View products</a>
+								<a class="btn btn-secondary" href="/how-to-buy/">How to buy by email</a>
+							</div>
+						</div>
+						<div class="hero-figure">
+							<img src={slide.src} alt={slide.alt} class="hero-img" loading={i === 0 ? "eager" : "lazy"} />
 						</div>
 					</div>
 				</article>
@@ -220,7 +224,9 @@ const slides = [
 		position: relative;
 		overflow: hidden;
 		border-bottom: 1px solid var(--border);
-		background: var(--surface-2);
+		background:
+			radial-gradient(ellipse at 80% 20%, rgba(220, 33, 37, 0.06), transparent 55%),
+			var(--bg);
 	}
 
 	.hero-track {
@@ -230,72 +236,50 @@ const slides = [
 	}
 
 	.hero-slide {
-		position: relative;
 		flex: 0 0 100%;
 		min-width: 100%;
-		min-height: clamp(360px, 56vh, 540px);
-		display: flex;
-		align-items: center;
-	}
-
-	.hero-slide-bg {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		z-index: 0;
-	}
-
-	/* Scrim so overlaid text stays legible over any photo */
-	.hero-slide::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: 1;
-		background: linear-gradient(
-			90deg,
-			rgba(20, 19, 17, 0.78) 0%,
-			rgba(20, 19, 17, 0.55) 42%,
-			rgba(20, 19, 17, 0.15) 100%
-		);
 	}
 
 	.hero-slide-inner {
-		position: relative;
-		z-index: 2;
-		width: 100%;
-		max-width: var(--max-width);
-		padding-top: 2rem;
-		padding-bottom: 2rem;
-		color: #fff;
+		display: grid;
+		grid-template-columns: 1.1fr 1fr;
+		gap: 3rem;
+		align-items: center;
+		padding-top: 3.5rem;
+		padding-bottom: 3.5rem;
+	}
+
+	.hero-text {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 	}
 
 	.hero-eyebrow {
 		margin: 0 0 0.5rem;
-		font-size: 0.95rem;
+		font-size: 0.9rem;
 		font-weight: 600;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: #f4cfcf;
+		color: var(--accent);
 	}
 
 	.hero-heading {
 		margin: 0 0 1rem;
-		max-width: 18ch;
-		font-size: clamp(1.9rem, 4.2vw, 3rem);
+		max-width: 16ch;
+		font-size: clamp(1.9rem, 4vw, 2.7rem);
 		line-height: 1.15;
-		color: #fff;
+		color: var(--text);
 	}
 
 	.hero-sub {
 		margin: 0 0 1.6rem;
 		font-size: 1.05rem;
-		color: rgba(255, 255, 255, 0.88);
+		color: var(--text-muted);
 	}
 
 	.hero-sub strong {
-		color: #fff;
+		color: var(--text);
 	}
 
 	.hero-actions {
@@ -304,13 +288,21 @@ const slides = [
 		flex-wrap: wrap;
 	}
 
-	.btn-ghost {
-		border: 1px solid rgba(255, 255, 255, 0.55);
-		color: #fff;
+	.hero-figure {
+		display: flex;
+		justify-content: center;
 	}
 
-	.btn-ghost:hover {
-		background: rgba(255, 255, 255, 0.12);
+	.hero-img {
+		display: block;
+		width: 100%;
+		max-width: 440px;
+		height: auto;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		border-radius: 12px;
+		border: 1px solid var(--border);
+		box-shadow: 0 15px 35px rgba(26, 25, 23, 0.08), 0 5px 15px rgba(26, 25, 23, 0.04);
 	}
 
 	.slider-arrow {
@@ -321,16 +313,16 @@ const slides = [
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.6rem;
-		height: 2.6rem;
+		width: 2.4rem;
+		height: 2.4rem;
 		border-radius: 999px;
-		border: 1px solid rgba(255, 255, 255, 0.4);
-		background: rgba(20, 19, 17, 0.35);
+		border: 1px solid var(--border);
+		background: rgba(255, 255, 255, 0.85);
 		backdrop-filter: blur(4px);
-		color: #fff;
+		color: var(--text);
 		cursor: pointer;
 		opacity: 0;
-		transition: opacity 0.25s ease, background 0.2s ease;
+		transition: opacity 0.25s ease, background 0.2s ease, color 0.2s ease;
 	}
 
 	.hero:hover .slider-arrow,
@@ -339,23 +331,23 @@ const slides = [
 	}
 
 	.slider-arrow:hover {
-		background: var(--accent);
-		border-color: var(--accent);
+		background: #fff;
+		color: var(--accent);
 	}
 
 	.slider-arrow.prev {
-		left: 1rem;
+		left: 0.75rem;
 	}
 
 	.slider-arrow.next {
-		right: 1rem;
+		right: 0.75rem;
 	}
 
 	.slider-dots {
 		position: absolute;
 		left: 0;
 		right: 0;
-		bottom: 1.1rem;
+		bottom: 1rem;
 		z-index: 3;
 		display: flex;
 		justify-content: center;
@@ -363,23 +355,23 @@ const slides = [
 	}
 
 	.dot {
-		width: 0.6rem;
-		height: 0.6rem;
+		width: 0.55rem;
+		height: 0.55rem;
 		padding: 0;
 		border-radius: 999px;
-		border: 1px solid rgba(255, 255, 255, 0.7);
-		background: transparent;
+		border: none;
+		background: var(--border);
 		cursor: pointer;
 		transition: background 0.2s ease, transform 0.2s ease;
 	}
 
 	.dot:hover {
-		background: rgba(255, 255, 255, 0.6);
+		background: var(--text-muted);
 	}
 
 	.dot.is-active {
-		background: #fff;
-		transform: scale(1.2);
+		background: var(--accent);
+		transform: scale(1.25);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -389,24 +381,34 @@ const slides = [
 	}
 
 	@media (max-width: 868px) {
-		.hero-slide {
-			min-height: clamp(320px, 70vh, 460px);
+		.hero-slide-inner {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			text-align: center;
+			padding-top: 2.5rem;
+			padding-bottom: 3rem;
 		}
-		.hero-slide::after {
-			background: linear-gradient(
-				180deg,
-				rgba(20, 19, 17, 0.45) 0%,
-				rgba(20, 19, 17, 0.6) 60%,
-				rgba(20, 19, 17, 0.78) 100%
-			);
+		.hero-text {
+			align-items: center;
+			order: 2;
+		}
+		.hero-figure {
+			order: 1;
+		}
+		.hero-heading {
+			max-width: none;
 		}
 		.hero-actions {
-			justify-content: flex-start;
+			justify-content: center;
+		}
+		.hero-img {
+			max-width: 320px;
 		}
 		.slider-arrow {
 			opacity: 1;
-			width: 2.2rem;
-			height: 2.2rem;
+		}
+		.slider-dots {
+			bottom: 0.5rem;
 		}
 	}
 
