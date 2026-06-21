@@ -8,6 +8,24 @@ const kits = [
 	{ brand: "MSI", adapter: "14-1 pin adapter board", note: "Most MSI boards in range use the 14-1 pin JTPM1 header." },
 	{ brand: "ASRock", adapter: "18-1 pin adapter board", note: "ASRock boards use an 18-1 pin TPM header." },
 ];
+
+const slides = [
+	{
+		src: "/2in1-Authikey.jpg",
+		alt: "Front of the Authikey 2-in-1 reversible TPM module",
+		caption: "One module, both chips — TPM 2.0 and TPM 1.2.",
+	},
+	{
+		src: "/2in1-back.jpg",
+		alt: "Back of the Authikey 2-in-1 reversible TPM module",
+		caption: "Flip it over to switch firmware — no flashing needed.",
+	},
+	{
+		src: "/asus-13pin-demo.jpg",
+		alt: "Authikey TPM module installed on an ASUS motherboard header",
+		caption: "Installed on an ASUS board via the included adapter.",
+	},
+];
 ---
 
 <Layout
@@ -15,17 +33,56 @@ const kits = [
 	description="2-in-1 reversible TPM 2.0 + 1.2 hardware modules for ASUS, Gigabyte, MSI and ASRock motherboards (2013–2018, LPC bus). Install Windows 11 on older PCs. Order by email."
 >
 	<section class="hero">
-		<div class="container">
-			<span class="badge">Infineon SLB9665 · LPC bus · Dual firmware</span>
-			<h1>TPM 2.0 / 1.2 modules for 2013–2018 motherboards</h1>
-			<p>
-				One reversible module, two real Infineon TPM chips: TPM 2.0 on one side for
-				Windows 11, TPM 1.2 on the other for legacy systems. Kits for ASUS, Gigabyte,
-				MSI and ASRock — <strong>US$53 per kit</strong>, adapter board included.
-			</p>
-			<div class="hero-actions">
-				<a class="btn btn-primary" href="/products/">Check compatibility</a>
-				<a class="btn btn-secondary" href="/how-to-buy/">How to buy by email</a>
+		<div class="container hero-grid">
+			<div class="hero-content">
+				<span class="badge">Infineon SLB9665 · LPC bus · Dual firmware</span>
+				<h1>TPM 2.0 / 1.2 modules for 2013–2018 motherboards</h1>
+				<p>
+					One reversible module, two real Infineon TPM chips: TPM 2.0 on one side for
+					Windows 11, TPM 1.2 on the other for legacy systems. Kits for ASUS, Gigabyte,
+					MSI and ASRock — <strong>US$53 per kit</strong>, adapter board included.
+				</p>
+				<div class="hero-actions">
+					<a class="btn btn-primary" href="/products/">Check compatibility</a>
+					<a class="btn btn-secondary" href="/how-to-buy/">How to buy by email</a>
+				</div>
+			</div>
+			<div class="hero-slider" data-slider aria-roledescription="carousel" aria-label="Product photos">
+				<div class="slides">
+					{slides.map((slide, i) => (
+						<figure
+							class={`slide${i === 0 ? " is-active" : ""}`}
+							data-slide
+							role="group"
+							aria-roledescription="slide"
+							aria-label={`${i + 1} of ${slides.length}`}
+							aria-hidden={i === 0 ? "false" : "true"}
+						>
+							<img src={slide.src} alt={slide.alt} class="slide-image" loading={i === 0 ? "eager" : "lazy"} />
+							<figcaption>{slide.caption}</figcaption>
+						</figure>
+					))}
+				</div>
+
+				<button type="button" class="slider-arrow prev" data-prev aria-label="Previous photo">
+					<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</button>
+				<button type="button" class="slider-arrow next" data-next aria-label="Next photo">
+					<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</button>
+
+				<div class="slider-dots" role="tablist" aria-label="Choose photo">
+					{slides.map((_, i) => (
+						<button
+							type="button"
+							class={`dot${i === 0 ? " is-active" : ""}`}
+							data-dot
+							role="tab"
+							aria-selected={i === 0 ? "true" : "false"}
+							aria-label={`Go to photo ${i + 1}`}
+						></button>
+					))}
+				</div>
 			</div>
 		</div>
 	</section>
@@ -111,27 +168,90 @@ const kits = [
 			<EmailCta />
 		</div>
 	</section>
+
+	<script>
+		const slider = document.querySelector<HTMLElement>("[data-slider]");
+		if (slider) {
+			const slides = Array.from(slider.querySelectorAll<HTMLElement>("[data-slide]"));
+			const dots = Array.from(slider.querySelectorAll<HTMLButtonElement>("[data-dot]"));
+			const prev = slider.querySelector<HTMLButtonElement>("[data-prev]");
+			const next = slider.querySelector<HTMLButtonElement>("[data-next]");
+			const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			let current = 0;
+			let timer: ReturnType<typeof setInterval> | undefined;
+
+			const show = (index: number) => {
+				current = (index + slides.length) % slides.length;
+				slides.forEach((slide, i) => {
+					const active = i === current;
+					slide.classList.toggle("is-active", active);
+					slide.setAttribute("aria-hidden", active ? "false" : "true");
+				});
+				dots.forEach((dot, i) => {
+					const active = i === current;
+					dot.classList.toggle("is-active", active);
+					dot.setAttribute("aria-selected", active ? "true" : "false");
+				});
+			};
+
+			const stop = () => {
+				if (timer) clearInterval(timer);
+				timer = undefined;
+			};
+
+			const start = () => {
+				if (reduceMotion || slides.length < 2) return;
+				stop();
+				timer = setInterval(() => show(current + 1), 5000);
+			};
+
+			prev?.addEventListener("click", () => { show(current - 1); start(); });
+			next?.addEventListener("click", () => { show(current + 1); start(); });
+			dots.forEach((dot, i) => dot.addEventListener("click", () => { show(i); start(); }));
+
+			slider.addEventListener("mouseenter", stop);
+			slider.addEventListener("mouseleave", start);
+			slider.addEventListener("focusin", stop);
+			slider.addEventListener("focusout", start);
+
+			start();
+		}
+	</script>
 </Layout>
 
 <style>
 	.hero {
-		padding: 5rem 0 4rem;
+		padding: 4rem 0;
 		background:
-			radial-gradient(ellipse at 70% 20%, rgba(220, 33, 37, 0.06), transparent 55%),
+			radial-gradient(ellipse at 80% 20%, rgba(220, 33, 37, 0.06), transparent 55%),
 			var(--bg);
 		border-bottom: 1px solid var(--border);
 	}
 
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.hero-content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
 	.hero h1 {
-		font-size: clamp(2rem, 5vw, 3rem);
+		font-size: clamp(2rem, 4vw, 2.6rem);
 		margin: 0.9rem 0 1rem;
-		max-width: 44rem;
+		line-height: 1.2;
 	}
 
 	.hero p {
 		font-size: 1.1rem;
 		color: var(--text-muted);
-		max-width: 42rem;
+		margin: 0 0 1.5rem 0;
+		line-height: 1.65;
 	}
 
 	.hero p strong {
@@ -141,8 +261,146 @@ const kits = [
 	.hero-actions {
 		display: flex;
 		gap: 1rem;
-		margin-top: 1.8rem;
 		flex-wrap: wrap;
+	}
+
+	.hero-slider {
+		position: relative;
+		width: 100%;
+		max-width: 440px;
+		margin: 0 auto;
+	}
+
+	.slides {
+		position: relative;
+		display: grid;
+	}
+
+	.slide {
+		grid-area: 1 / 1;
+		margin: 0;
+		opacity: 0;
+		visibility: hidden;
+		transform: scale(0.99);
+		transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
+	}
+
+	.slide.is-active {
+		opacity: 1;
+		visibility: visible;
+		transform: scale(1);
+		transition: opacity 0.5s ease, transform 0.5s ease;
+	}
+
+	.slide-image {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		border-radius: 12px;
+		box-shadow: 0 15px 35px rgba(26, 25, 23, 0.08), 0 5px 15px rgba(26, 25, 23, 0.04);
+		border: 1px solid var(--border);
+	}
+
+	.slide figcaption {
+		margin-top: 0.75rem;
+		font-size: 0.85rem;
+		color: var(--text-muted);
+		text-align: center;
+	}
+
+	.slider-arrow {
+		position: absolute;
+		top: calc(50% - 1.4rem);
+		transform: translateY(-50%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.2rem;
+		height: 2.2rem;
+		border-radius: 999px;
+		border: 1px solid var(--border);
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: blur(4px);
+		color: var(--text);
+		cursor: pointer;
+		opacity: 0;
+		transition: opacity 0.25s ease, background 0.2s ease, transform 0.2s ease;
+	}
+
+	.hero-slider:hover .slider-arrow,
+	.slider-arrow:focus-visible {
+		opacity: 1;
+	}
+
+	.slider-arrow:hover {
+		background: #fff;
+		color: var(--accent);
+	}
+
+	.slider-arrow.prev {
+		left: 0.6rem;
+	}
+
+	.slider-arrow.next {
+		right: 0.6rem;
+	}
+
+	.slider-dots {
+		display: flex;
+		justify-content: center;
+		gap: 0.45rem;
+		margin-top: 0.75rem;
+	}
+
+	.dot {
+		width: 0.5rem;
+		height: 0.5rem;
+		padding: 0;
+		border-radius: 999px;
+		border: none;
+		background: var(--border);
+		cursor: pointer;
+		transition: background 0.2s ease, transform 0.2s ease;
+	}
+
+	.dot:hover {
+		background: var(--text-muted);
+	}
+
+	.dot.is-active {
+		background: var(--accent);
+		transform: scale(1.25);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.slide {
+			transition: opacity 0.01s, visibility 0s;
+		}
+		.slide.is-active {
+			transform: none;
+		}
+	}
+
+	@media (max-width: 868px) {
+		.hero {
+			padding: 3rem 0;
+		}
+		.hero-grid {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+			text-align: center;
+		}
+		.hero-content {
+			align-items: center;
+		}
+		.hero-slider {
+			max-width: 360px;
+		}
+		.slider-arrow {
+			opacity: 1;
+		}
 	}
 
 	.grid {
