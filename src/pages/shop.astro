@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EmailCta from "../components/EmailCta.astro";
+import { kits } from "../data/kits";
+---
+
+<Layout
+	title="Shop — Authikey TPM 2.0 / 1.2 Kits | US$53"
+	description="Four 2-in-1 reversible TPM 2.0 + 1.2 kits for ASUS, Gigabyte, MSI and ASRock motherboards (2013–2018, LPC bus). US$53 per kit, ordered by email with a compatibility check."
+>
+	<section class="section">
+		<div class="container">
+			<h1>Shop</h1>
+			<p class="lede">
+				Every kit is the same 2-in-1 reversible TPM module (TPM 2.0 + 1.2 on the
+				LPC bus) plus a brand-specific adapter board. Pick the kit that matches your
+				motherboard brand — all are <strong>US$53</strong>, ordered by email after a
+				compatibility check.
+			</p>
+
+			<div class="grid">
+				{kits.map((kit) => (
+					<a class="card kit-card" href={`/product/${kit.slug}/`}>
+						<div class="kit-head">
+							<h2>{kit.brand} TPM kit</h2>
+							<span class="badge">US$53</span>
+						</div>
+						<p class="adapter">20-1 pin module + {kit.adapter}</p>
+						<p class="note">{kit.note}</p>
+						<span class="more">View {kit.brand} kit →</span>
+					</a>
+				))}
+			</div>
+
+			<div class="cta-block">
+				<h2>Not sure which kit fits your board?</h2>
+				<p class="lede">
+					Email us your motherboard brand and exact model — we confirm compatibility
+					before you pay anything. See <a href="/how-to-buy/">how to buy</a> or the full
+					<a href="/products/">compatibility lists</a>.
+				</p>
+				<EmailCta subject="TPM compatibility check" />
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2.2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.2rem;
+		margin: 1.8rem 0 2.5rem;
+	}
+
+	.kit-card {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		color: inherit;
+		transition: border-color 0.2s ease, transform 0.2s ease;
+	}
+
+	.kit-card:hover {
+		border-color: var(--accent);
+		transform: translateY(-2px);
+	}
+
+	.kit-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.6rem;
+	}
+
+	.kit-head h2 {
+		margin: 0;
+		font-size: 1.2rem;
+	}
+
+	.adapter {
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 0.92rem;
+		margin: 0 0 0.5rem;
+	}
+
+	.note {
+		color: var(--text-muted);
+		font-size: 0.92rem;
+		margin: 0 0 1rem;
+		flex-grow: 1;
+	}
+
+	.more {
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 0.92rem;
+	}
+
+	.cta-block {
+		margin-top: 3rem;
+	}
+
+	.cta-block h2 {
+		margin-bottom: 0.4rem;
+	}
+</style>

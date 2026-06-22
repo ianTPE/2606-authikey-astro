@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://authikey.com/sitemap-index.xml
