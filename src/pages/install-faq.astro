@@ -25,11 +25,11 @@ const faqs = [
 	},
 	{
 		q: "What do I need besides the TPM to install Windows 11?",
-		a: "A 64-bit CPU, UEFI boot with CSM disabled, a GPT-partitioned system disk, 4 GB RAM and 64 GB storage. The TPM module covers the TPM 2.0 requirement; the rest is BIOS and disk setup. Older PCs with CPUs not on Microsoft's supported list cannot be upgraded in place — the upgrade installer blocks them. Instead, do a clean (fresh) installation onto an empty or reformatted drive: a fresh install does not run the CPU supported-list check, so the TPM module plus the settings above is all you need.",
+		a: "A 64-bit CPU, UEFI boot with CSM disabled, a GPT-partitioned system disk, 4 GB RAM and 64 GB storage. The 2-in-1 reversible module covers the TPM requirement for either version — TPM 2.0 on one side, TPM 1.2 on the other (Windows 11 still runs on TPM 1.2); the rest is BIOS and disk setup. Older PCs with CPUs not on Microsoft's supported list cannot be upgraded in place — the upgrade installer blocks them. Instead, do a clean (fresh) installation onto an empty or reformatted drive: a fresh install does not run the CPU supported-list check, so the TPM module plus the settings above is all you need.",
 	},
 	{
 		q: "Windows doesn't detect the TPM after installation. What should I check?",
-		a: "First, confirm the module is fully seated and correctly oriented. Motherboards rarely label pin 1, so line up the blocked (filled) hole on the module's socket with the missing pin on the board's header — that keyed alignment tells you it's the right way round; never force it. On an older PC the header contacts can be dusty or oxidised: blow out any dust, then seat and unseat the module a few times to wipe the contacts clean before fitting it for good. Second, enable the TPM (sometimes called \"Security Device\" or \"TPM Device Selection — discrete TPM\") in the BIOS. Third, update the BIOS to the latest version — early BIOS releases for some boards had TPM 2.0 bugs. Then check Windows with tpm.msc.",
+		a: "First, confirm the module is fully seated and correctly oriented. Line up the blocked (filled) hole on the module's socket with the missing pin on the board's header — that keyed alignment tells you it's the right way round; never force it. On an older PC the header contacts can be dusty or oxidised: blow out any dust, then seat and unseat the module a few times to wipe the contacts clean before fitting it for good. Second, enable the TPM (sometimes called \"Security Device\" or \"TPM Device Selection — discrete TPM\") in the BIOS. Third, update the BIOS to the latest version — early BIOS releases for some boards had TPM 2.0 bugs. Then check Windows with tpm.msc.",
 	},
 	{
 		q: "Does the kit include the adapter board?",
