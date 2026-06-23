@@ -95,7 +95,25 @@ const faqs = [
 				</p>
 			</div>
 
-			<h2 class="faq-title">Frequently asked questions</h2>
+			<div class="card video-card">
+			<h2>Watch the install walkthrough</h2>
+			<p class="lede">
+				Prefer to see it done? This short video walks through the whole process —
+				locating the header, seating the module, and the two BIOS settings.
+			</p>
+			<div class="video-wrap">
+				<iframe
+					src="https://www.youtube-nocookie.com/embed/M5_2-s10fZA"
+					title="Authikey TPM module installation walkthrough"
+					loading="lazy"
+					frameborder="0"
+					allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
+			</div>
+		</div>
+
+		<h2 class="faq-title">Frequently asked questions</h2>
 			<div class="faq-list">
 				{faqs.map((faq) => (
 					<details class="card">
@@ -146,6 +164,29 @@ const faqs = [
 
 	.faq-title {
 		margin-top: 3rem;
+	}
+
+	.video-card {
+		margin-top: 1.8rem;
+	}
+
+	.video-wrap {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		margin-top: 1rem;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		overflow: hidden;
+		background: #000;
+	}
+
+	.video-wrap iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
 	}
 
 	.faq-list {
