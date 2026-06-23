@@ -13,7 +13,6 @@ const navItems = [
 	{ href: "/", label: "Home" },
 	{ href: "/products/", label: "Products & Compatibility" },
 	{ href: "/install-faq/", label: "Install & FAQ" },
-	{ href: "/firmware-upgrade/", label: "Firmware Update" },
 	{ href: "/how-to-buy/", label: "How to Buy" },
 	{ href: "/contact/", label: "Contact" },
 ];
@@ -94,6 +93,7 @@ const isActive = (href: string) =>
 					<strong>Pages</strong>
 					<p class="footer-links">
 						{navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+						<a href="/firmware-upgrade/">Firmware Update</a>
 					</p>
 				</div>
 			</div>
