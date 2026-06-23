@@ -12,6 +12,11 @@ const kits = [
 		intelAdapter:
 			"Z390, H370, B365, B360, Z370, H310, Q370, X299, C621, C422, C246, Q270, B250, Z270, H270, Z170, H170, H110, Q170, B150",
 		amd: "AM4 (300 / 400 series)",
+		images: [
+			{ src: "/asus-giga-first.png", alt: "Authikey TPM module with the ASUS / Gigabyte adapter board" },
+			{ src: "/asus-sample.png", alt: "Authikey TPM module installed on an ASUS motherboard header" },
+			{ src: "/2in1-back-small.png", alt: "Back of the Authikey 2-in-1 reversible TPM module" },
+		],
 	},
 	{
 		id: "gigabyte",
@@ -87,6 +92,15 @@ const kits = [
 						<h2>{kit.brand} kit</h2>
 						<span class="badge">US$53</span>
 					</header>
+					{kit.images && (
+						<div class="kit-gallery">
+							{kit.images.map((img, i) => (
+								<a class="thumb" href={`#shot-${kit.id}-${i}`} aria-label={`View larger: ${img.alt}`}>
+									<img src={img.src} alt={img.alt} loading="lazy" />
+								</a>
+							))}
+						</div>
+					)}
 					<table>
 						<tbody>
 							<tr><th>Header types</th><td>{kit.headers}</td></tr>
@@ -96,6 +110,11 @@ const kits = [
 							<tr><th>AMD platforms</th><td>{kit.amd}</td></tr>
 						</tbody>
 					</table>
+					{kit.images && kit.images.map((img, i) => (
+						<a class="lightbox" id={`shot-${kit.id}-${i}`} href="#" aria-label="Close image">
+							<img src={img.src} alt={img.alt} />
+						</a>
+					))}
 				</article>
 			))}
 
@@ -181,6 +200,64 @@ const kits = [
 
 	.kit-header h2 {
 		margin: 0;
+	}
+
+	.kit-gallery {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin: 0 0 1.2rem;
+	}
+
+	.thumb {
+		display: block;
+		width: 96px;
+		height: 96px;
+		border-radius: 8px;
+		border: 1px solid var(--border);
+		overflow: hidden;
+		background: #fff;
+		cursor: zoom-in;
+		transition: border-color 0.2s ease, transform 0.2s ease;
+	}
+
+	.thumb:hover,
+	.thumb:focus-visible {
+		border-color: var(--accent);
+		transform: translateY(-2px);
+	}
+
+	.thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	/* Pure-CSS lightbox: hidden until its id is the URL :target */
+	.lightbox {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+		background: rgba(15, 14, 13, 0.85);
+		cursor: zoom-out;
+	}
+
+	.lightbox:target {
+		display: flex;
+	}
+
+	.lightbox img {
+		max-width: min(92vw, 900px);
+		max-height: 88vh;
+		width: auto;
+		height: auto;
+		border-radius: 8px;
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 	}
 
 	.warn ul {
