@@ -25,7 +25,7 @@ const faqs = [
 	},
 	{
 		q: "What do I need besides the TPM to install Windows 11?",
-		a: "A 64-bit CPU on Microsoft's supported list (or a registry bypass for CPU checks), UEFI boot with CSM disabled, a GPT-partitioned system disk, 4 GB RAM and 64 GB storage. The TPM module satisfies the TPM 2.0 requirement; the rest is BIOS configuration.",
+		a: "A 64-bit CPU, UEFI boot with CSM disabled, a GPT-partitioned system disk, 4 GB RAM and 64 GB storage. The TPM module covers the TPM 2.0 requirement; the rest is BIOS and disk setup. Older PCs with CPUs not on Microsoft's supported list cannot be upgraded in place — the upgrade installer blocks them. Instead, do a clean (fresh) installation onto an empty or reformatted drive: a fresh install does not run the CPU supported-list check, so the TPM module plus the settings above is all you need.",
 	},
 	{
 		q: "Windows doesn't detect the TPM after installation. What should I check?",
@@ -84,9 +84,9 @@ const faqs = [
 						requires UEFI boot with Secure Boot capability.
 					</li>
 					<li>
-						<strong>Verify, then install</strong> — in Windows, run
-						<code>tpm.msc</code> to confirm the TPM is detected, then proceed with
-						your Windows 11 installation or upgrade.
+					<strong>Verify, then install</strong> — in Windows, run
+					<code>tpm.msc</code> to confirm the TPM is detected, then proceed with a
+					clean installation of Windows 11 (older PCs cannot use the in-place upgrade path).
 					</li>
 				</ol>
 				<p class="tip">
