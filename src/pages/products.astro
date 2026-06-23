@@ -199,4 +199,41 @@ const kits = [
 	.cta-block h2 {
 		margin-bottom: 0.4rem;
 	}
+
+	/* Desktop: fix the label column width so all four kit tables (and the
+	   spec table) line up. Stops the wide gap that appears when a kit's
+	   chipset list is short and the browser pads the label column instead. */
+	@media (min-width: 640px) {
+		.spec-card table th,
+		.kit table th {
+			width: 16rem;
+		}
+	}
+
+	/* Mobile: stack each row (label above value) so the long
+	   "Intel chipsets…" labels aren't squeezed by white-space: nowrap. */
+	@media (max-width: 639px) {
+		.spec-card tr,
+		.kit tr {
+			display: block;
+			padding: 0.55rem 0;
+			border-bottom: 1px solid var(--border);
+		}
+
+		.spec-card th,
+		.spec-card td,
+		.kit th,
+		.kit td {
+			display: block;
+			padding: 0;
+			border-bottom: none;
+			white-space: normal;
+		}
+
+		.spec-card th,
+		.kit th {
+			color: var(--text);
+			margin-bottom: 0.15rem;
+		}
+	}
 </style>
