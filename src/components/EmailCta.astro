@@ -1,10 +1,12 @@
 ---
 interface Props {
 	subject?: string;
+	email?: string;
 }
 
-const email = "support@authikey.com";
-const { subject = "TPM kit inquiry" } = Astro.props;
+// Defaults to sales@ — most CTAs are pre-sales (buying, compatibility).
+// Post-purchase support links pass email="support@authikey.com" explicitly.
+const { subject = "TPM kit inquiry", email = "sales@authikey.com" } = Astro.props;
 const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
 ---
 
