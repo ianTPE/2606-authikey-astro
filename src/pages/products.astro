@@ -150,6 +150,12 @@ const kits = [
 		margin-top: 1.8rem;
 	}
 
+	/* Offset anchor jumps (/products/#asus etc.) so the kit heading isn't
+	   hidden behind the sticky site header. */
+	.kit {
+		scroll-margin-top: 80px;
+	}
+
 	.spec-card h2,
 	.kit h2,
 	.warn h2 {
