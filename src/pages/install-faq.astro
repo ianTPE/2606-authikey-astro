@@ -29,7 +29,7 @@ const faqs = [
 	},
 	{
 		q: "Windows doesn't detect the TPM after installation. What should I check?",
-		a: "First, confirm the module is fully seated and oriented per pin 1. Second, enable the TPM (sometimes called \"Security Device\" or \"TPM Device Selection — discrete TPM\") in the BIOS. Third, update the BIOS to the latest version — early BIOS releases for some boards had TPM 2.0 bugs. Then check Windows with tpm.msc.",
+		a: "First, confirm the module is fully seated and correctly oriented. Motherboards rarely label pin 1, so line up the blocked (filled) hole on the module's socket with the missing pin on the board's header — that keyed alignment tells you it's the right way round; never force it. On an older PC the header contacts can be dusty or oxidised: blow out any dust, then seat and unseat the module a few times to wipe the contacts clean before fitting it for good. Second, enable the TPM (sometimes called \"Security Device\" or \"TPM Device Selection — discrete TPM\") in the BIOS. Third, update the BIOS to the latest version — early BIOS releases for some boards had TPM 2.0 bugs. Then check Windows with tpm.msc.",
 	},
 	{
 		q: "Does the kit include the adapter board?",
