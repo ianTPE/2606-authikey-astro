@@ -115,11 +115,11 @@ const kits = [
 							<tr><th>AMD platforms</th><td>{kit.amd}</td></tr>
 						</tbody>
 					</table>
-					{kit.images && kit.images.map((img, i) => (
-						<a class="lightbox" id={`shot-${kit.id}-${i}`} href="#" aria-label="Close image">
-							<img src={img.src} alt={img.alt} />
-						</a>
-					))}
+				{kit.images && kit.images.map((img, i) => (
+					<a class="lightbox" id={`shot-${kit.id}-${i}`} href={`#${kit.id}`} aria-label="Close image">
+						<img src={img.src} alt={img.alt} />
+					</a>
+				))}
 				</article>
 			))}
 
