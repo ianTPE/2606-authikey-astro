@@ -1,0 +1,288 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EmailCta from "../components/EmailCta.astro";
+---
+
+<Layout
+	title="TPM 2.0 Firmware Upgrade Guide — Authikey"
+	description="How to upgrade the Infineon SLB9665 TPM 2.0 firmware on an Authikey module: download the updater, disable Trusted Computing in BIOS, run update.bat as administrator, re-enable the TPM, and verify Attestation Ready in Windows 11."
+>
+	<section class="section">
+		<div class="container">
+			<h1>TPM 2.0 Firmware Upgrade Guide</h1>
+			<p class="lede">
+				<strong>Prerequisite:</strong> Before beginning, back up any crucial data. You
+				should also know how to access your BIOS settings.
+			</p>
+
+			<div class="card">
+				<h2>Step-by-Step Instructions</h2>
+				<ol class="steps">
+					<li>
+						<strong>Download Firmware</strong>
+						<ul class="sub">
+							<li>Navigate to <a href="https://authikey.com/download/">authikey.com/download/</a>.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Download_page.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Download_page.webp" alt="The Authikey download page showing the firmware zip" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+							<li>Locate and download the file named <code>authikey3353.zip</code>.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Extract Files</strong>
+						<ul class="sub">
+							<li>Once the download is complete, locate the <code>authikey3353.zip</code> file.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Downloads_authikey3353.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Downloads_authikey3353.webp" alt="The downloaded authikey3353.zip in the Downloads folder" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+							<li>Extract the contents, specifically the <code>3353exe</code> folder, to your desktop.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/3353exe_folder.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/3353exe_folder.webp" alt="The extracted 3353exe folder on the desktop" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Modify BIOS Settings</strong>
+						<ul class="sub">
+							<li>Restart your computer and access your BIOS settings.</li>
+							<li>Find the <code>Trusted Computing</code> option and disable it.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Trusted_Computing_Disable.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Trusted_Computing_Disable.webp" alt="BIOS Trusted Computing option set to Disabled" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Boot into Windows 11</strong>
+						<ul class="sub">
+							<li>Save the changes made in the BIOS and reboot your computer to Windows 11.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Prepare for Update</strong>
+						<ul class="sub">
+							<li>Locate and open the <code>3353exe</code> folder on your desktop.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Initiate Firmware Update</strong>
+						<ul class="sub">
+							<li>Find the <code>update.bat</code> file.</li>
+							<li>Right-click on it and choose <code>Run as administrator</code>.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Run_as_administrator.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Run_as_administrator.webp" alt="Right-click menu choosing Run as administrator on update.bat" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Firmware Update Process</strong>
+						<ul class="sub">
+							<li>A dialog box will surface.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/More_info.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/More_info.webp" alt="Windows dialog with a More info option" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+							<li>Allow the update to run.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Run_anywary.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Run_anywary.webp" alt="Windows Run anyway button to allow the updater" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+							<li>A pop-up window will appear, indicating the Infineon SLB9665 firmware update process.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/pop-up_window.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/pop-up_window.webp" alt="Infineon SLB9665 firmware update pop-up window" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+							<li>Wait for the update to complete.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Update_completed.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Update_completed.webp" alt="Firmware update completed confirmation" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Troubleshooting</strong>
+						<ul class="sub">
+							<li>
+								If the update does not initiate successfully, verify that:
+								<ul>
+									<li><code>Trusted Computing</code> remains disabled in the BIOS.</li>
+									<li>You executed <code>update.bat</code> with administrative rights.</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Reconfigure BIOS Settings</strong>
+						<ul class="sub">
+							<li>Reboot your computer and re-enter the BIOS settings.</li>
+							<li>Enable <code>Trusted Computing</code>.</li>
+							<li>Save and reboot, then access the BIOS once more to verify Security Device Support is enabled and details are visible.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Trusted_Computing_Enable.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Trusted_Computing_Enable.webp" alt="BIOS Trusted Computing enabled with Security Device Support details visible" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+							<li>Save any changes and restart, launching into Windows 11.</li>
+						</ul>
+					</li>
+					<li>
+						<strong>Verification</strong>
+						<ul class="sub">
+							<li>Once you are back in Windows 11, open the Settings app.</li>
+							<li>Click on <code>Privacy &amp; security</code>.</li>
+							<li>Scroll down to the <code>Device security</code> section and click on <code>Security processor</code>.</li>
+							<li>Under <code>TPM status</code>, make sure that the status is <code>Attestation Ready</code>.</li>
+							<li>
+								<figure class="guide-shot">
+									<a href="/firmware-guide/Attestation_Ready.webp" target="_blank" rel="noopener">
+										<img src="/firmware-guide/Attestation_Ready.webp" alt="Windows Security processor detail showing TPM status Attestation Ready" loading="lazy" />
+									</a>
+								</figure>
+							</li>
+						</ul>
+					</li>
+				</ol>
+			</div>
+
+			<div class="card note">
+				<h2>Important Reminders</h2>
+				<ul>
+					<li>
+						Always connect your computer to a dependable power source during firmware
+						updates to avoid potential interruptions.
+					</li>
+					<li>Post-upgrade, you may delete the <code>3353exe</code> folder from your desktop.</li>
+				</ul>
+			</div>
+
+			<div class="cta-block">
+				<h2>Update not working?</h2>
+				<p class="lede">
+					Email us with what you see on screen and your motherboard model — we'll help
+					you get the firmware updated.
+				</p>
+				<EmailCta subject="Firmware update help" />
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2.2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.card h2 {
+		margin-top: 0;
+		font-size: 1.3rem;
+	}
+
+	.steps {
+		padding-left: 1.3rem;
+		margin: 1rem 0 0;
+	}
+
+	.steps > li {
+		margin-bottom: 1.4rem;
+	}
+
+	.steps > li > strong {
+		font-size: 1.05rem;
+	}
+
+	.sub {
+		list-style: disc;
+		padding-left: 1.3rem;
+		margin: 0.5rem 0 0;
+	}
+
+	.sub li {
+		margin-bottom: 0.6rem;
+	}
+
+	.sub ul {
+		list-style: circle;
+		margin: 0.4rem 0 0;
+	}
+
+	.guide-shot {
+		margin: 0.8rem 0 0;
+	}
+
+	.guide-shot a {
+		display: inline-block;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		overflow: hidden;
+		background: #fff;
+		transition: border-color 0.2s ease, transform 0.2s ease;
+	}
+
+	.guide-shot a:hover,
+	.guide-shot a:focus-visible {
+		border-color: var(--accent);
+		transform: translateY(-2px);
+	}
+
+	.guide-shot img {
+		display: block;
+		width: 100%;
+		max-width: 380px;
+		height: auto;
+	}
+
+	.note {
+		margin-top: 1.8rem;
+	}
+
+	.note ul {
+		padding-left: 1.3rem;
+		margin: 0.5rem 0 0;
+	}
+
+	.note li {
+		margin-bottom: 0.6rem;
+	}
+
+	.cta-block {
+		margin-top: 3rem;
+	}
+
+	.cta-block h2 {
+		margin-bottom: 0.4rem;
+	}
+</style>
