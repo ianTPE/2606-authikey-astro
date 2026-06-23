@@ -4,7 +4,11 @@
       "Bash(npx astro *)",
       "Bash(rm -f src/pages/shop.astro)",
       "Bash(rm -rf src/pages/product)",
-      "Bash(rm -f src/data/kits.ts)"
+      "Bash(rm -f src/data/kits.ts)",
+      "Bash(cd /c/Users/iantp/GitHub/2606-authikey-astro/public/uploads && find . -type f | head -200 && echo \"---COUNT---\" && find . -type f | wc -l && echo \"---SIZE---\" && du -sh .)",
+      "Read(//c/c/Users/iantp/GitHub/2606-authikey-astro/public/**)",
+      "Bash(cd /c/Users/iantp/GitHub/2606-authikey-astro && grep -rIl \"uploads\" --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git --exclude-dir=uploads . 2>/dev/null)",
+      "Read(//c/c/Users/iantp/GitHub/2606-authikey-astro/**)"
     ]
   }
 }
