@@ -1,0 +1,7 @@
+# Legacy WooCommerce URLs → current pages (301 permanent).
+# Preserves Google ranking and inbound links from the old shop.
+/shop/                    /products/             301
+/product/tpm-for-asus/    /products/#asus        301
+/product/tpm-for-giga/    /products/#gigabyte    301
+/product/tpm-for-msi/     /products/#msi         301
+/product/tpm-for-asrock/  /products/#asrock      301
